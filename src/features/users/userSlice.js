@@ -39,3 +39,5 @@ export const userSlice = createSlice({
 export const { updateUserName } = userSlice.actions;
 
 export default userSlice.reducer;
+
+export const getUser = (state) => state.user.userName;
