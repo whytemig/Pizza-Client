@@ -2,11 +2,12 @@ import { Form, redirect, useActionData, useNavigation } from "react-router-dom";
 import { createOrder } from "../../services/apiRestaurant";
 import Button from "../../ui/Button";
 import EmptyCart from "../cart/EmptyCart";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearCart, getCart, totalCartPrice } from "../cart/cartSlice";
 import { store } from "../../reduxstore/store.js";
 import { formatCurrency } from "../../utilities/helpers";
 import { useState } from "react";
+import { fetchAddress } from "../users/userSlice.js";
 
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str) =>
@@ -19,7 +20,18 @@ function CreateOrder() {
   const name = useSelector((state) => state.user.userName);
   const cart = useSelector(getCart);
   const totalCartPriceVal = useSelector(totalCartPrice);
-  // for now
+  const {
+    status: addressStatus,
+    position,
+    address,
+    error,
+  } = useSelector((state) => state.user);
+
+  console.log(address);
+  const dispatch = useDispatch();
+
+  const isLoading = addressStatus === "loading";
+
   const priorityPrice = withPriority ? totalCartPriceVal * 0.02 : 0;
 
   let totalPrice = totalCartPriceVal + priorityPrice;
@@ -54,22 +66,43 @@ function CreateOrder() {
             <input type="tel" name="phone" required className="input w-full" />
             {formError?.phone && (
               <p className="text-xs mt-2 text-white bg-red-700 p-2 rounded-md">
-                {formError.phone}
+                {error}
               </p>
             )}
           </div>
         </div>
 
-        <div className="mb-5 flex gap-2 flex-col sm:flex-row sm:items-center">
+        <div className="mb-5 flex gap-2 flex-col sm:flex-row sm:items-center relative">
           <label className="sm:basis-40">Address</label>
           <div className="grow">
             <input
               type="text"
               name="address"
+              disabled={isLoading}
+              defaultValue={address}
               required
               className="input w-full"
             />
+            {addressStatus === "error" && (
+              <p className="text-xs mt-2 text-white bg-red-700 p-2 rounded-md">
+                {formError.phone}
+              </p>
+            )}
           </div>
+          {!position.latitude && !position.longitude && (
+            <span className="absolute right-[3px] top-[3px] z-50 sm:top-[3px] sm:right-[3px]">
+              <Button
+                disabled={isLoading}
+                type="small"
+                onClick={(e) => {
+                  e.preventDefault();
+                  dispatch(fetchAddress());
+                }}
+              >
+                Get Address
+              </Button>
+            </span>
+          )}
         </div>
 
         <div className="mb-12 flex gap-5 items-center">
@@ -88,7 +121,16 @@ function CreateOrder() {
 
         <div>
           <input type="hidden" name="cart" value={JSON.stringify(cart)} />
-          <Button disabled={isSubmitting} type="primary">
+          <input
+            type="hidden"
+            name="position"
+            value={
+              position.longitude && position.latitude
+                ? `${position.latitude}, ${position.longitude}`
+                : ""
+            }
+          />
+          <Button disabled={isSubmitting || isLoading} type="primary">
             {isSubmitting
               ? "Placing Order"
               : `Order Now from ${formatCurrency(totalPrice)}`}
