@@ -3,6 +3,7 @@ import { getMenu } from "../../services/apiRestaurant";
 import MenuItem from "./MenuItem";
 
 function Menu() {
+  //Use the useLoaderData hook to fetch the data from the loader element.
   const menu = useLoaderData();
 
   return (
@@ -13,7 +14,7 @@ function Menu() {
     </ul>
   );
 }
-
+// getting the from the API function and exporting it to the loader element in the Route.
 export const loader = async () => await getMenu();
 
 export default Menu;
