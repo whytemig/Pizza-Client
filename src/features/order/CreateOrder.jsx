@@ -27,7 +27,6 @@ function CreateOrder() {
     error,
   } = useSelector((state) => state.user);
 
-  console.log(address);
   const dispatch = useDispatch();
 
   const isLoading = addressStatus === "loading";
@@ -143,7 +142,10 @@ function CreateOrder() {
 
 export const action = async ({ request }) => {
   const formData = await request.formData();
+  console.log(formData);
   let data = Object.fromEntries(formData);
+
+  console.log(data);
 
   const order = {
     ...data,
