@@ -1,6 +1,7 @@
 import LinkButton from "../../ui/LinkButton";
 
 function EmptyCart() {
+  //custome component for when the cart is empty.
   return (
     <div className="py-3 px-4">
       <LinkButton to="/menu">&larr; Back to menu</LinkButton>

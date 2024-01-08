@@ -13,6 +13,8 @@ import UpdateOrder from "./UpdateOrder.jsx";
 function Order() {
   const order = useLoaderData();
 
+  //this hook was pretty difficult to understand and how to use it.
+  //fetch data not associated with UI routes
   const fetcher = useFetcher();
 
   useEffect(() => {

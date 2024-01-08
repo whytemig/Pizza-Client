@@ -12,9 +12,12 @@ import Error from "./ui/Error";
 import { action as updateAction } from "./features/order/UpdateOrder";
 
 const router = createBrowserRouter([
+  //FROM VERSION6 THIS IS HOW TO CREATE CHILDREN IN ROUTE.....BUT I STILL PREFER V5.
+  //UNDERSTANDNG THE LOADER AND ACTIONS WAS TRICKY TO UNDERSTAND.
   {
     element: <AppLayout />,
     errorElement: <Error />,
+    //THE CHILDREN FOR  THE APPLAYOUT
     children: [
       {
         path: "/",
@@ -23,7 +26,9 @@ const router = createBrowserRouter([
       {
         path: "/menu",
         element: <Menu />,
+        //function to provide data to the route element before it renders.
         loader: menuLoader,
+        //ErrorElement for all routes
         errorElement: <Error />,
       },
       {

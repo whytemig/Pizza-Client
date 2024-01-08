@@ -1,10 +1,11 @@
+//FUNCTION FOR CURRENCY CONVERSION.
 export function formatCurrency(value) {
   return new Intl.NumberFormat("en-Us", {
     style: "currency",
     currency: "USD",
   }).format(value);
 }
-
+//FUNCTION FOR DATE CONVERSITION.
 export function formatDate(dateStr) {
   return new Intl.DateTimeFormat("en", {
     day: "numeric",
@@ -14,6 +15,7 @@ export function formatDate(dateStr) {
   }).format(new Date(dateStr));
 }
 
+//FUNCTION FOR TIME DIFFERENCE.
 export function calcMinutesLeft(dateStr) {
   const d1 = new Date().getTime();
   const d2 = new Date(dateStr).getTime();

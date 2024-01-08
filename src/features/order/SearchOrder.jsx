@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function SearchOrder() {
+  //SEARCH COMPONENT FOR FINDING THE PREVIOUS ORDER BY INPUTING THE ORDER ID PROVIVED BY THE API.
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
 

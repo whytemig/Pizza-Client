@@ -9,7 +9,7 @@ import { formatCurrency } from "../../utilities/helpers";
 import { useState } from "react";
 import { fetchAddress } from "../users/userSlice.js";
 
-// https://uibakery.io/regex-library/phone-number
+//LINK FOR REGEX VALIDATION FOR PHONE NUMBER => https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str) =>
   /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
     str
@@ -39,14 +39,14 @@ function CreateOrder() {
 
   const isSubmitting = navigation.state === "submitting";
 
+  //this hook is for form validation. DOCS not as clear to use. Google it instead.
   const formError = useActionData();
 
   if (!cart.length) return <EmptyCart />;
-
+  //Form hook provided by react router v6 using the name atttribute to capture the target.value instead of using the useState hook.
   return (
     <div className="py-6 px-4">
       <h2 className="text-xl font-semibold mb-8">Ready to order? Let go!</h2>
-
       <Form method="POST" action="/order/new">
         <div className="mb-5 flex gap-2 flex-col sm:flex-row sm:items-center">
           <label className="sm:basis-40">First Name</label>
@@ -119,6 +119,7 @@ function CreateOrder() {
         </div>
 
         <div>
+          {/* clever trick i found on stackover flow */}
           <input type="hidden" name="cart" value={JSON.stringify(cart)} />
           <input
             type="hidden"
@@ -140,12 +141,14 @@ function CreateOrder() {
   );
 }
 
+//function action used the request props which consist of the name value of the input element.
+
 export const action = async ({ request }) => {
   const formData = await request.formData();
   console.log(formData);
   let data = Object.fromEntries(formData);
 
-  console.log(data);
+  // console.log(data);
 
   const order = {
     ...data,
@@ -168,7 +171,7 @@ export const action = async ({ request }) => {
   let { id } = createData;
 
   store.dispatch(clearCart());
-
+  //useNavigate couldn't work within the function so GOOGLE showed me that the redirect hook form react routerv6 will work.
   return redirect(`/order/${id}`);
 };
 

@@ -5,7 +5,7 @@ import { Loader } from "./Loader";
 
 export const AppLayout = () => {
   const navigation = useNavigation();
-
+  //FROM THE DOC & GOOGLING-- navigate.state = loading, idle, subitting
   // THIS STATE IS UNIVERSAL FOR THE ENTIRE APP.
   // SO IT WORKS THROUGHOUT THE APP.
   const isLoader = navigation.state === "loading";

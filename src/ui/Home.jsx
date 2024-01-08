@@ -17,6 +17,7 @@ function Home() {
       {name === "" ? (
         <CreateUser />
       ) : (
+        //CUSTOM COMPONENT FOR THE BUTTON.
         <Button to="/menu" type="primary">
           Continue your Order, {name}
         </Button>

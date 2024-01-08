@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 
 export default function Button({ children, disabled, to, type, onClick }) {
+  //CUSTOMIZABLE BUTTON COMPONENT....
+  //TOO MUCH IF STATEMENTS..... HOW WOULD I SIMPLIFIED THIS?
   let base =
     "tracking-wide  inline-block rounded-full text-stone-800 font-semibold uppercase bg-red-500 hover:bg-green-300 hover:text-white transition-colors ease-in duration-200 focus:outline-none focus:ring focus:ring-green-300 focus:ring-offset-2 text-sm";
 

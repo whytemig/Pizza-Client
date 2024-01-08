@@ -2,6 +2,7 @@ import { useRouteError } from "react-router-dom";
 import LinkButton from "./LinkButton";
 
 function Error() {
+  // this hook returns anything thrown during an action, loader, or rendering.
   const error = useRouteError();
 
   return (

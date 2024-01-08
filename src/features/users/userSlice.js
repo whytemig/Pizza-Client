@@ -7,21 +7,7 @@ function getPosition() {
   });
 }
 
-// async function fetchAddress() {
-//   // 1) We get the user's geolocation position
-//   const positionObj = await getPosition();
-//   const position = {
-//     latitude: positionObj.coords.latitude,
-//     longitude: positionObj.coords.longitude,
-//   };
-
-//   // 2) Then we use a reverse geocoding API to get a description of the user's address, so we can display it the order form, so that the user can correct it if wrong
-//   const addressObj = await getAddress(position);
-//   const address = `${addressObj?.locality}, ${addressObj?.city} ${addressObj?.postcode}, ${addressObj?.countryName}`;
-
-//   // 3) Then we return an object with the data that we are interested in
-//   return { position, address };
-// }
+//fetching the users location with the Async Thunk method.
 
 export const fetchAddress = createAsyncThunk("users/fetchAddress", async () => {
   const positionObj = await getPosition();
@@ -52,6 +38,8 @@ export const userSlice = createSlice({
       state.userName = action.payload;
     },
   },
+  //this extraReducer for the thunk wasn't difficult to understand.
+  //Easier than it looks.
   extraReducers: (builder) => {
     builder
       .addCase(fetchAddress.pending, (state) => {
@@ -73,4 +61,5 @@ export const { updateUserName } = userSlice.actions;
 
 export default userSlice.reducer;
 
+//function for the useSelector, not necesssary just currious.
 export const getUser = (state) => state.user.userName;

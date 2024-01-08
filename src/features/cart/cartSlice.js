@@ -28,6 +28,7 @@ export const cartSlice = createSlice({
       pizzaItem.quantity -= 1;
       pizzaItem.totalPrice = pizzaItem.quantity * pizzaItem.unitPrice;
       if (pizzaItem.quantity === 0) {
+        //reusing reducers to simplify the function.
         cartSlice.caseReducers.deleteItem(state, action);
       }
     },
@@ -57,6 +58,7 @@ export function getCurrentQuantity(id) {
     return pizzaItem?.quantity ? pizzaItem.quantity : 0;
   };
 }
+//this was another version of the same code above that i saw online but i prefered mine, I could understand it better.
 
 // export const getCurrentQuantity = (id) => (state) =>
 //   state.cart.cart.find((item) => item.pizzaId === id);
