@@ -7,7 +7,9 @@ Readi Pizza was developed for a local pizza client that aquire their own API. Th
 
 ## 🔗 Links & Lessons learned
 The application was deployed using netlify.
-[![My Skills](https://skillicons.dev/icons?i=netlify)](https://readipizza.netlify.app/)
+[![My Skills](https://skillicons.dev/icons?i=netlify)](https://readipizza.netlify.app/) 
+
+https://readipizza.netlify.app/
 Please feel free to visit the site and give your honest opinion of the project. Although I've gained alot of knowledge throughout the year, I still recieved a numerous amount of errors and alot of researching was involved. Althoughout, i learned how to researched these errors and how to questioned these errors. What were the cause? Why did it occur? And, how to deal with them? In summary alot of trial and error. 
 
 
